@@ -1,0 +1,26 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: fast
+provisioner: kubernetes.io/vsphere-volume
+reclaimPolicy: Retain
+parameters:
+    diskformat: thin
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: fast-ebs
+provisioner: kubernetes.io/vsphere-volume
+reclaimPolicy: Retain
+parameters:
+    diskformat: thin
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: encrypted-ebs
+provisioner: kubernetes.io/vsphere-volume
+reclaimPolicy: Retain
+parameters:
+    diskformat: thin
