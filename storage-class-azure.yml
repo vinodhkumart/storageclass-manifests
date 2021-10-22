@@ -1,0 +1,40 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: fast
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  labels:
+    kubernetes.io/cluster-service: "true"
+  name: fast-ebs
+provisioner: kubernetes.io/azure-disk
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  storageaccounttype: Premium_LRS
+  kind: Managed
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  labels:
+    kubernetes.io/cluster-service: "true"
+  name: encrypted-ebs
+provisioner: kubernetes.io/azure-disk
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  storageaccounttype: Premium_LRS
+  kind: Managed
